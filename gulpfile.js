@@ -45,6 +45,14 @@ gulp.task('compass', function() {
 		.on('error', gutil.log))
 	.pipe(gulp.dest('builds/development/css'))
 });
+//-- 'watch' task
+gulp.task('watch', function() {
+	//whenever coffeeSources files change, the task 'coffee' is executed
+	gulp.watch(coffeeSources, ['coffee']);
+	gulp.watch(jsSources, ['js']);
+	gulp.watch('components/sass/*.scss', ['compass']);
+});
+
 
 // gulp.task('all', ['coffee', 'js', 'compass']);
 gulp.task('default', ['coffee', 'js', 'compass']);
