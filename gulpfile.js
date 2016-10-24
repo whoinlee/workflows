@@ -3,6 +3,7 @@ var gulp = require('gulp'),
 	coffee = require('gulp-coffee'),
 	browserify = require('gulp-browserify'),
 	compass = require('gulp-compass'),
+	connect = require('gulp-connect'),
 	concat = require('gulp-concat');
 
 //-- 'log' task, $gulp log
@@ -45,6 +46,13 @@ gulp.task('compass', function() {
 		.on('error', gutil.log))
 	.pipe(gulp.dest('builds/development/css'))
 });
+//-- 'connect' task
+gulp.task('connect', function() {
+	connect.server({
+		root: 'builds/development/',
+		livereload: true
+	});
+});
 //-- 'watch' task
 gulp.task('watch', function() {
 	//whenever coffeeSources files change, the task 'coffee' is executed
@@ -55,4 +63,4 @@ gulp.task('watch', function() {
 
 
 // gulp.task('all', ['coffee', 'js', 'compass']);
-gulp.task('default', ['coffee', 'js', 'compass', 'watch']);
+gulp.task('default', ['coffee', 'js', 'compass', 'connect', 'watch']);
